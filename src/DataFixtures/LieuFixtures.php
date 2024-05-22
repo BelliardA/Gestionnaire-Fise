@@ -11,20 +11,18 @@ class LieuFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $parkNames = [
-            "BMX park world cup",
-            "BMX street",
-            "FlatLand",
-            "Skate street",
-            "Skate park world cup",
-            "Roller park",
-            "Roller street",
+            ['name' => "Park world cup", 'niveau' => 4],
+            ['name' => "Street park", 'niveau' => 3],
+            ['name' => "FlatLand", 'niveau' => 2],
+            ['name' => "Park Amateur", 'niveau' => 1],
+            ['name' => "Spin Ramp", 'niveau' => 4],
         ];
 
         foreach($parkNames as $parkName) {
             $lieu = new Lieu();
 
-            $lieu->setNom($parkName);
-            $lieu->setNiveau(rand(1, 4));
+            $lieu->setNom($parkName['name']);
+            $lieu->setNiveau($parkName['niveau']);
 
             $manager->persist($lieu);
         }

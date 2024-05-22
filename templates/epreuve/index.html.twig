@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Epreuve index{% endblock %}
+
+{% block body %}
+    <h1>Epreuve index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Degre</th>
+                <th>Date</th>
+                <th>Sport</th>
+                <th>Park</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for epreuve in epreuves %}
+            <tr>
+                <td>{{ epreuve.degre }}</td>
+                <td>{{ epreuve.date ? epreuve.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ epreuve.sport }}</td>
+                <td>{{ epreuve.lieu.nom }}</td>
+                <td>
+                    <a href="{{ path('app_epreuve_show', {'id': epreuve.id}) }}">show</a>
+                    <a href="{{ path('app_epreuve_edit', {'id': epreuve.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_epreuve_new') }}">Create new</a>
+{% endblock %}

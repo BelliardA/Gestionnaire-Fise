@@ -26,12 +26,27 @@ class ParticipeFixtures extends Fixture implements DependentFixtureInterface
         $sportifs = $this->sportifRepository->findAll();
         $epreuves = $this->epreuveRepository->findAll();
 
-        foreach ($sportifs as $sportif) {
-            $participe = new Participe();
-            $participe->setSportif($sportif);
-            $participe->setEpreuve($epreuves[array_rand($epreuves)]);
+        $epreuvesBySport = [];
 
-            $manager->persist($participe);
+        // Grouper les épreuves par sport
+        foreach ($epreuves as $epreuve) {
+            $epreuvesBySport[$epreuve->getSport()][] = $epreuve;
+        }
+
+        foreach ($sportifs as $sportif) {
+            $sport = $sportif->getSport();
+            
+            // Vérifier s'il y a des épreuves pour le sport du sportif
+            if (!empty($epreuvesBySport[$sport])) {
+                // Répartir les sportifs de manière cyclique sur les épreuves disponibles
+                $epreuveIndex = array_rand($epreuvesBySport[$sport]);
+                $epreuve = $epreuvesBySport[$sport][$epreuveIndex];
+
+                $participe = new Participe();
+                $participe->setSportif($sportif);
+                $participe->setEpreuve($epreuve);
+                $manager->persist($participe);
+            }
         }
 
         $manager->flush();

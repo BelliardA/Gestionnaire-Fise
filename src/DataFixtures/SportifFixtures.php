@@ -16,12 +16,12 @@ class SportifFixtures extends Fixture
 
         $faker = Factory::create('fr_CH');
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 120; $i++) {
             $sportif = new Sportif();
             $sportif->setNom($faker->lastName);
             $sportif->setPrenom($faker->firstName);
             $sportif->setAge($faker->numberBetween(16, 40));
-            $sportif->setSport($faker->randomElement(['BMX', 'Skate', 'Roller']));
+            $sportif->setSport($faker->randomElement(['BMX', 'Skateboard', 'Roller', 'Trottinette']));
 
             $manager->persist($sportif);
         }

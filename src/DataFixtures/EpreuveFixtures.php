@@ -24,21 +24,45 @@ class EpreuveFixtures extends Fixture implements DependentFixtureInterface
 
         $faker = Factory::create('fr_CH');
 
-        $lieu = $this->lieuRepository->findAll();
+        $lieux = $this->lieuRepository->findAll();
 
-        for ($i = 0; $i < 10; $i++) {
-            $epreuve = new Epreuve();
-            $epreuve->setDate($faker->dateTimeInInterval('+2 weeks', '+5 days'));
-            $epreuve->setDegre($faker->randomElement(['8eme de finale', 'Quart de finale', 'Demi finale', 'Finale']));
-            $epreuve->setSport($faker->randomElement(['BMX', 'Skate', 'Roller']));
-            $epreuve->setLieu($faker->randomElement($lieu));
-            
+        $sportsData = [
+            'BMX' => [
+                'date' => ['2024-06-08 14:00:00', '2024-06-09 15:30:00', '2024-06-11 15:00:00']
+            ],
+            'Skateboard' => [
+                'date' => ['2024-06-08 12:00:00', '2024-06-09 14:30:00', '2024-06-10 20:00:00']
+            ],
+            'Roller' => [
+                'date' => ['2024-06-08 10:00:00', '2024-06-09 12:30:00', '2024-06-10 18:00:00']
+            ],
+            'Trottinette' => [
+                'date' => ['2024-06-08 16:00:00', '2024-06-09 18:30:00', '2024-06-11 16:00:00']
+            ]
+        ];
 
-            $manager->persist($epreuve);
+        foreach ($sportsData as $sport => $data) {
+            foreach ($data['date'] as $i => $date) {
+                $lieu = $faker->randomElement($lieux);
+                $this->addData($sport, $date, $lieu, $manager, $i);
+            }
         }
 
         $manager->flush();
     }
+
+    function addData($sport, $date, $lieu, $manager, $i){
+        $epreuve = new Epreuve();
+        $degre = ($i == 0) ? 'Qualification' : (($i == 1) ? 'Demi finale' : 'Finale');
+        $epreuve->setDegre($degre);
+        $epreuve->setLieu($lieu);
+        $date = new \DateTime($date);
+        $epreuve->setDate($date);
+        $epreuve->setSport($sport);
+
+        $manager->persist($epreuve);
+    }   
+
     public function getDependencies()
     {
         return [
