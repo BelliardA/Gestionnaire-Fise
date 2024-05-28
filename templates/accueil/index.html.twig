@@ -56,15 +56,15 @@
         <p>Le Festival International des Sports Extrêmes (FISE) est l'un des plus grands événements de sports extrêmes au monde, attirant des milliers de participants et de spectateurs chaque année. Le FISE propose une incroyable variété de compétitions dans des disciplines telles que le BMX, le skateboard, le roller et bien plus encore.</p>
 
         <p>Ce site est destiné au public pour découvrir le programme complet du FISE 2024, y compris les horaires des épreuves, les lieux des compétitions, et des informations sur les sportifs participant à cet événement spectaculaire.</p>
-
+        <div class="navigation">
+            <p><a href="{{ path('app_epreuve_index') }}" class="btn btn-primary">Voir le programme des épreuves</a></p>
+        </div>
         <div class="images">
             <img src="{{ asset('styles/img/acceuil/acceuil1.jpg') }}" alt="Image du FISE">
             <img src="{{ asset('styles/img/acceuil/acceuil2.jpg') }}" alt="Image du FISE">
         </div>
     </div>
 
-    <div class="navigation">
-        <p><a href="{{ path('app_epreuve_index') }}" class="btn btn-primary">Voir le programme des épreuves</a></p>
-    </div>
+
 </div>
 {% endblock %}
