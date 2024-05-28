@@ -3,19 +3,42 @@
 {% block title %}Epreuve{% endblock %}
 
 {% block body %}
-    <h1>Epreuve</h1>
-
-    <p>{{ epreuve.degre }}</p>
-    <p>{{ epreuve.date ? epreuve.date|date('Y-m-d H:i:s') : '' }}</p>
-    <p>{{ epreuve.sport }}</p>
-    {% for participe in epreuve.participes %}
-        <p>{{ participe.sportif.nom}} {{ participe.sportif.prenom}} </p>
-    {% endfor %}
-    
-    
-    <a href="{{ path('app_epreuve_index') }}">back to list</a>
-
-    <a href="{{ path('app_epreuve_edit', {'id': epreuve.id}) }}">edit</a>
-
-    {{ include('epreuve/_delete_form.html.twig') }}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <h1 class="display-4">Epreuve</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 text-center">
+                <img src="{{ asset('styles/img/' ~ epreuve.sport ~ '/' ~ epreuve.lieu.img) }}" alt="image" class="img-fluid" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">{{ epreuve.sport }}</h2>
+                        <p class="card-text"><strong>Degré:</strong> {{ epreuve.degre }}</p>
+                        <p class="card-text"><strong>Lieu:</strong> {{ epreuve.lieu.nom }}</p>
+                        <p class="card-text"><strong>Date:</strong> {{ epreuve.date ? epreuve.date|date('Y-m-d H:i:s') : '' }}</p>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <h3>Participants</h3>
+                    <ul class="list-group">
+                        {% for participe in epreuve.participes %}
+                            <li class="list-group-item">{{ participe.sportif.nom }} {{ participe.sportif.prenom }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <a href="{{ path('app_epreuve_index') }}" class="btn btn-primary">Back to list</a>
+                <a href="{{ path('app_epreuve_edit', {'id': epreuve.id}) }}" class="btn btn-secondary">Edit</a>
+                {{ include('epreuve/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 {% endblock %}
+

@@ -19,6 +19,9 @@ class Lieu
     #[ORM\Column]
     private ?int $niveau = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $img = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class Lieu
     public function setNiveau(int $niveau): static
     {
         $this->niveau = $niveau;
+
+        return $this;
+    }
+
+    public function getImg(): ?string
+    {
+        return $this->img;
+    }
+
+    public function setImg(string $img): static
+    {
+        $this->img = $img;
 
         return $this;
     }

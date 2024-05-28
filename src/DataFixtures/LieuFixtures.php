@@ -11,11 +11,11 @@ class LieuFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $parkNames = [
-            ['name' => "Park world cup", 'niveau' => 4],
-            ['name' => "Street park", 'niveau' => 3],
-            ['name' => "FlatLand", 'niveau' => 2],
-            ['name' => "Park Amateur", 'niveau' => 1],
-            ['name' => "Spin Ramp", 'niveau' => 4],
+            ['name' => "Park world cup", 'niveau' => 4, 'img' => "pwc.jpg"],
+            ['name' => "Street park", 'niveau' => 3,'img' => "street.jpg"],
+            ['name' => "FlatLand", 'niveau' => 2,'img' => "flat.jpg"],
+            ['name' => "Park Amateur", 'niveau' => 1,'img' => "amateur.jpg"],
+            ['name' => "Spin Ramp", 'niveau' => 4,'img' => "spinramp.jpg"],
         ];
 
         foreach($parkNames as $parkName) {
@@ -23,6 +23,7 @@ class LieuFixtures extends Fixture
 
             $lieu->setNom($parkName['name']);
             $lieu->setNiveau($parkName['niveau']);
+            $lieu->setImg($parkName['img']);
 
             $manager->persist($lieu);
         }
