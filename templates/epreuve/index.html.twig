@@ -9,7 +9,6 @@
         <thead>
             <tr>
                 <th>Degre</th>
-                <th>Date</th>
                 <th>Sport</th>
                 <th>Park</th>
                 <th>actions</th>
@@ -19,12 +18,13 @@
         {% for epreuve in epreuves %}
             <tr>
                 <td>{{ epreuve.degre }}</td>
-                <td>{{ epreuve.date ? epreuve.date|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ epreuve.sport }}</td>
                 <td>{{ epreuve.lieu.nom }}</td>
                 <td>
-                    <a href="{{ path('app_epreuve_show', {'id': epreuve.id}) }}">show</a>
-                    <a href="{{ path('app_epreuve_edit', {'id': epreuve.id}) }}">edit</a>
+                    <a href="{{ path('app_epreuve_show', {'id': epreuve.id}) }}">Détails</a>
+                    {% if is_granted('ROLE_USER') %}
+                        <a href="{{ path('app_epreuve_edit', {'id': epreuve.id}) }}">edit</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -34,6 +34,7 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_epreuve_new') }}">Create new</a>
+    {% if is_granted('ROLE_USER') %}
+        <a href="{{ path('app_epreuve_new') }}">Create new</a>
+    {% endif %}
 {% endblock %}

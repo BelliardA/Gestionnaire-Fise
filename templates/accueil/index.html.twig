@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil FISE 2024{% endblock %}
+
+{% block body %}
+<style>
+    .page-wrapper {
+        margin: 2em auto;
+        max-width: 1200px;
+        padding: 1em;
+        font: 18px/1.5 sans-serif;
+        background: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .page-header {
+        text-align: center;
+        margin-bottom: 2em;
+    }
+    .page-header h1 {
+        font-size: 2.5em;
+        color: #333;
+    }
+    .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .content p {
+        max-width: 800px;
+        text-align: justify;
+        margin-bottom: 2em;
+        line-height: 1.6;
+    }
+    .images {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    .images img {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<div class="page-wrapper">
+    <div class="page-header">
+        <h1>Bienvenue sur le site du FISE 2024!</h1>
+    </div>
+    
+    <div class="content">
+        <p>Le Festival International des Sports Extrêmes (FISE) est l'un des plus grands événements de sports extrêmes au monde, attirant des milliers de participants et de spectateurs chaque année. Le FISE propose une incroyable variété de compétitions dans des disciplines telles que le BMX, le skateboard, le roller et bien plus encore.</p>
+
+        <p>Ce site est destiné au public pour découvrir le programme complet du FISE 2024, y compris les horaires des épreuves, les lieux des compétitions, et des informations sur les sportifs participant à cet événement spectaculaire.</p>
+
+        <div class="images">
+            <img src="{{ asset('styles/img/acceuil/acceuil1.jpg') }}" alt="Image du FISE">
+            <img src="{{ asset('styles/img/acceuil/acceuil2.jpg') }}" alt="Image du FISE">
+        </div>
+    </div>
+
+    <div class="navigation">
+        <p><a href="{{ path('app_epreuve_index') }}" class="btn btn-primary">Voir le programme des épreuves</a></p>
+    </div>
+</div>
+{% endblock %}

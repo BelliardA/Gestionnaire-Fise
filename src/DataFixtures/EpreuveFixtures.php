@@ -43,7 +43,18 @@ class EpreuveFixtures extends Fixture implements DependentFixtureInterface
 
         foreach ($sportsData as $sport => $data) {
             foreach ($data['date'] as $i => $date) {
-                $lieu = $faker->randomElement($lieux);
+                if($sport == 'BMX'){
+                    $excludedLieu = 'Park Amateur';
+                }
+                else{
+                    $excludedLieu = 'FlatLand';
+                }
+
+                $filteredLieux = array_filter($lieux, function($lieu) use ($excludedLieu) {
+                    return $lieu->getNom() !== $excludedLieu;
+                });
+
+                $lieu = $faker->randomElement($filteredLieux);
                 $this->addData($sport, $date, $lieu, $manager, $i);
             }
         }
